@@ -186,7 +186,7 @@ var Paint = /** @class */ (function () {
         });
         // Сохраняем временный холст
         const link = document.createElement('a');
-        link.download = 'drawing.png';
+        link.download = 'drawing.jpg';
         link.href = tempCanvas.toDataURL();
         link.click();
     };
