@@ -1,43 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paint</title>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Приложение для рисования</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="bords">
-    <canvas id="paint-canvas" class="bord" width="1500" height="900"></canvas>
-  </div>
-  
-  <div class="navigation">
-    <p>Выбор цвета</p>
-    <input type="color" id="brush-color" value="#000000">
-    <p>Выбор размера кисти</p>
-    <input type="range" id="brush-size" min="1" max="60" value="5">
-    <p>Жесткость кисти</p>
-    <input type="range" id="brush-hardness" min="0" max="1" step="0.1" value="1">
-    
-    <button id="clear-button" class="myButton">Очистить холст</button>
-    <input type="checkbox" id="eraser" class="demoToggleCheckbox"> 
-    <label for="eraser" class="toggleCheckbox">Ластик</label> 
-    
-    <input type="checkbox" id="brush-toggle" class="demoToggleCheckbox" checked>
-    <label for="brush-toggle" class="toggleCheckbox">Кисть</label>
-    
-    <input type="checkbox" id="rect-toggle" class="demoToggleCheckbox">
-    <label for="rect-toggle" class="toggleCheckbox">Прямоугольник</label>
-    
-    <input type="checkbox" id="circle-toggle" class="demoToggleCheckbox">
-    <label for="circle-toggle" class="toggleCheckbox">Круг</label>
-    
-    <input type="checkbox" id="line-toggle" class="demoToggleCheckbox">
-    <label for="line-toggle" class="toggleCheckbox">Линия</label>
-    
-    <button id="save-button" class="myButton">Сохранить</button>
-  </div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class="container">
+      <!-- Панель инструментов -->
+      <section class="tools-board">
+        <div class="row">
+          <label class="title">Формы</label>
+          <ul class="options">
+            <!-- Инструмент для рисования прямоугольника -->
+            <li class="option tool" id="rectangle">
+              <img src="icons/rectangle.svg" alt="Rectangle">
+              <span>Прямоугольник</span>
+            </li>
+            <!-- Инструмент для рисования круга -->
+            <li class="option tool" id="circle">
+              <img src="icons/circle.svg" alt="Circle">
+              <span>Круг</span>
+            </li>
+            <!-- Инструмент для рисования треугольника -->
+            <li class="option tool" id="triangle">
+              <img src="icons/triangle.svg" alt="Triangle">
+              <span>Треугольник</span>
+            </li>
+            <!-- Инструмент для рисования линии -->
+            <li class="option tool" id="line">
+              <img src="icons/line.svg" alt="Line">
+              <span>Линия</span>
+            </li>
+            <!-- Инструмент для рисования ромба -->
+            <li class="option tool" id="diamond">
+              <img src="icons/diamond.svg" alt="Diamond">
+              <span>Ромб</span>
+            </li>
+            <li class="option">
+              <input type="checkbox" id="fill-color">
+              <label for="fill-color">Цвет заливки</label>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <label class="title">Опции</label>
+          <ul class="options">
+            <!-- Инструмент кисть -->
+            <li class="option active tool" id="brush">
+              <img src="icons/brush.svg" alt="Brush">
+              <span>Кисть</span>
+            </li>
+            <!-- Инструмент ластик -->
+            <li class="option tool" id="eraser">
+              <img src="icons/eraser.svg" alt="Eraser">
+              <span>Ластик</span>
+            </li>
+            <!-- Ползунок для изменения размера кисти -->
+            <li class="option">
+              <input type="range" id="size-slider" min="1" max="30" value="5">
+            </li>
+          </ul>
+        </div>
+        <div class="row colors">
+          <label class="title">Цвета</label>
+          <ul class="options">
+            <!-- Кнопки выбора цвета -->
+            <li class="option"></li>
+            <li class="option selected"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option">
+              <input type="color" id="color-picker" value="#4A98F7">
+            </li>
+          </ul>
+        </div>
+        <div class="row buttons">
+          <!-- Кнопки очистки и сохранения -->
+          <button class="undo-btn">Отменить</button>
+          <button class="clear-canvas">Очистить</button>
+          <button class="save-img">Сохранить</button>
+          <!-- Кнопка отмены -->
+        </div>
+      </section>
 
-  <script src="index.js"></script>
-</body>
+      <!-- Холст для рисования -->
+      <section class="drawing-board">
+        <canvas></canvas>
+      </section>
+    </div>
+
+    <script src="main.js" defer></script>
+  </body>
 </html>
