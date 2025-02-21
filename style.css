@@ -173,7 +173,7 @@ section {
   margin: 10px;
 }
 
-.undo-btn {
-    background-color: #E02020;
+.buttons .undo-btn {
+    background: #E02020;
     color: white;
 }
