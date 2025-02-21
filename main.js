@@ -9,6 +9,17 @@ const canvas = document.querySelector("canvas"),
     undoBtn = document.querySelector(".undo-btn"),
     ctx = canvas.getContext("2d");
 
+    function setCanvasSize() {
+        canvas.width = window.innerWidth - 250; // Ширина минус ширина панели инструментов
+        canvas.height = window.innerHeight;
+      }
+      
+      // Инициализация размеров холста
+      setCanvasSize();
+      
+      // Обновляем размеры холста при изменении размера окна
+      window.addEventListener("resize", setCanvasSize);
+
 let prevMouseX, prevMouseY, snapshot,
     isDrawing = false,
     selectedTool = "brush",
