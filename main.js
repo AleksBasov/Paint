@@ -7,18 +7,18 @@ const canvas = document.querySelector("canvas"),
     clearCanvas = document.querySelector(".clear-canvas"),
     saveImg = document.querySelector(".save-img"),
     undoBtn = document.querySelector(".undo-btn"),
-    ctx = canvas.getContext("2d");
+    ctx = canvas.getContext("2d", { willReadFrequently: true }); // ← Исправлено здесь
 
-    function setCanvasSize() {
-        canvas.width = window.innerWidth - 250; // Ширина минус ширина панели инструментов
-        canvas.height = window.innerHeight;
-      }
-      
-      // Инициализация размеров холста
-      setCanvasSize();
-      
-      // Обновляем размеры холста при изменении размера окна
-      window.addEventListener("resize", setCanvasSize);
+function setCanvasSize() {
+    canvas.width = window.innerWidth - 250; // Ширина минус ширина панели инструментов
+    canvas.height = window.innerHeight;
+}
+
+// Инициализация размеров холста
+setCanvasSize();
+
+// Обновляем размеры холста при изменении размера окна
+window.addEventListener("resize", setCanvasSize);
 
 let prevMouseX, prevMouseY, snapshot,
     isDrawing = false,
