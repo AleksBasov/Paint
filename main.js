@@ -8,6 +8,7 @@ const canvas = document.querySelector("canvas"),
     saveImg = document.querySelector(".save-img"),
     undoBtn = document.querySelector(".undo-btn"),
     ctx = canvas.getContext("2d", { willReadFrequently: true });
+    
 
 let prevMouseX, prevMouseY, snapshot,
     isDrawing = false,
@@ -233,3 +234,15 @@ const drawing = (e) => {
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mousemove", drawing);
 canvas.addEventListener("mouseup", () => isDrawing = false);
+
+
+
+
+
+// Обновляем значение при изменении ползунка
+sizeSlider.addEventListener("input", () => {
+    brushWidth = sizeSlider.value; // Обновляем толщину кисти
+    brushSizeValue.textContent = brushWidth; // Обновляем отображаемое значение
+});
+
+const brushSizeValue = document.querySelector("#brush-size-value");
