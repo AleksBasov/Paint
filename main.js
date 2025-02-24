@@ -7,26 +7,28 @@ const canvas = document.querySelector("canvas"),
     clearCanvas = document.querySelector(".clear-canvas"),
     saveImg = document.querySelector(".save-img"),
     undoBtn = document.querySelector(".undo-btn"),
-    ctx = canvas.getContext("2d", { willReadFrequently: true }); // ← Исправлено здесь
-
-function setCanvasSize() {
-    canvas.width = window.innerWidth - 250; // Ширина минус ширина панели инструментов
-    canvas.height = window.innerHeight;
-}
-
-// Инициализация размеров холста
-setCanvasSize();
-
-// Обновляем размеры холста при изменении размера окна
-window.addEventListener("resize", setCanvasSize);
+    ctx = canvas.getContext("2d", { willReadFrequently: true });
 
 let prevMouseX, prevMouseY, snapshot,
     isDrawing = false,
     selectedTool = "brush",
     brushWidth = 5,
     selectedColor = "#000",
-    history = [];
+    history = [],
+    isTextMode = false,
+    textInput = "",
+    bezierPoints = [];
 
+// Установка размеров холста
+function setCanvasSize() {
+    canvas.width = window.innerWidth - 250;
+    canvas.height = window.innerHeight;
+}
+
+setCanvasSize();
+window.addEventListener("resize", setCanvasSize);
+
+// Установка фона холста
 const setCanvasBackground = () => {
     ctx.fillStyle = "#fff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -39,7 +41,7 @@ window.addEventListener("load", () => {
     setCanvasBackground();
 });
 
-// Получение реальных координат курсора относительно холста
+// Получение координат курсора
 const getCanvasCoordinates = (e) => {
     const rect = canvas.getBoundingClientRect();
     return {
@@ -48,7 +50,7 @@ const getCanvasCoordinates = (e) => {
     };
 }
 
-// Функции для рисования форм
+// Функции для рисования фигур
 const drawRect = (e) => {
     const { x, y } = getCanvasCoordinates(e);
     if (!fillColor.checked) {
@@ -96,12 +98,36 @@ const drawDiamond = (e) => {
     fillColor.checked ? ctx.fill() : ctx.stroke();
 }
 
-// Обработчики для инструментов
+// Кривая Безье
+const drawBezier = (e) => {
+    if (bezierPoints.length < 2) return;
+    const { x, y } = getCanvasCoordinates(e);
+    ctx.beginPath();
+    ctx.moveTo(bezierPoints[0].x, bezierPoints[0].y);
+    ctx.bezierCurveTo(bezierPoints[1].x, bezierPoints[1].y, x, y, x, y);
+    ctx.stroke();
+}
+
+canvas.addEventListener("click", (e) => {
+    if (selectedTool === "bezier") {
+        const { x, y } = getCanvasCoordinates(e);
+        bezierPoints.push({ x, y });
+        if (bezierPoints.length === 2) {
+            drawBezier(e);
+            bezierPoints = [];
+        }
+    }
+});
+
+// Обработчики инструментов
 toolBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         document.querySelector(".options .active").classList.remove("active");
         btn.classList.add("active");
         selectedTool = btn.id;
+        if (selectedTool === "bezier") {
+            bezierPoints = [];
+        }
     });
 });
 
@@ -163,10 +189,32 @@ const drawing = (e) => {
     if (!isDrawing) return;
     const { x, y } = getCanvasCoordinates(e);
     ctx.putImageData(snapshot, 0, 0);
-    if (selectedTool === "brush" || selectedTool === "eraser") {
+
+    if (selectedTool === "brush" || selectedTool === "eraser" || selectedTool === "pencil") {
         ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+
+        // Настройки для кисти
+        if (selectedTool === "brush") {
+            ctx.lineWidth = brushWidth;
+            ctx.lineCap = "round"; // Сглаженные края
+            ctx.lineJoin = "round"; // Сглаженные углы
+        }
+
+        // Настройки для карандаша
+        if (selectedTool === "pencil") {
+            ctx.lineWidth = brushWidth / 2; // Карандаш тоньше кисти
+            ctx.lineCap = "square"; // Угловатые края
+            ctx.lineJoin = "square"; // Угловатые углы
+            ctx.globalAlpha = 0.7; // Полупрозрачность для эффекта карандаша
+        }
+
         ctx.lineTo(x, y);
         ctx.stroke();
+
+        // Сбрасываем прозрачность после рисования
+        if (selectedTool === "pencil") {
+            ctx.globalAlpha = 1.0;
+        }
     } else if (selectedTool === "rectangle") {
         drawRect(e);
     } else if (selectedTool === "circle") {
@@ -177,6 +225,8 @@ const drawing = (e) => {
         drawLine(e);
     } else if (selectedTool === "diamond") {
         drawDiamond(e);
+    } else if (selectedTool === "bezier") {
+        drawBezier(e);
     }
 }
 

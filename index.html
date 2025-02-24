@@ -45,26 +45,35 @@
           </ul>
         </div>
         <!-- В разделе инструментов -->
-<div class="row">
-  <label class="title">Инструменты</label>
-  <ul class="options">
-    <!-- Инструмент кисть -->
-    <li class="option active tool" id="brush">
-      <img src="./img/кисть.png" alt="Brush">
-      <span>Кисть</span>
-    </li>
-    
-    <!-- Инструмент ластик -->
-    <li class="option tool" id="eraser">
-      <img src="./img/ластик.png" alt="Eraser">
-      <span>Ластик</span>
-    </li>
-    <!-- Ползунок для изменения размера кисти -->
-    <li class="option">
-      <input type="range" id="size-slider" min="1" max="30" value="5">
-    </li>
-  </ul>
-</div>
+        <div class="row">
+          <label class="title">Инструменты</label>
+          <ul class="options">
+            <!-- Инструмент кисть -->
+            <li class="option active tool" id="brush">
+              <img src="./img/кисть.png" alt="Brush">
+              <span>Кисть</span>
+            </li>
+            <!-- Инструмент карандаш -->
+            <li class="option tool" id="pencil">
+              <img src="./img/карандаш.png" alt="Pencil">
+              <span>Карандаш</span>
+            </li>
+            <!-- Инструмент ластик -->
+            <li class="option tool" id="eraser">
+              <img src="./img/ластик.png" alt="Eraser">
+              <span>Ластик</span>
+            </li>
+            <!-- Инструмент кривая Безье -->
+            <li class="option tool" id="bezier">
+              <img src="./img/криваяБезье.png" alt="Bezier">
+              <span>Кривая Безье</span>
+            </li>
+            <!-- Ползунок для изменения размера кисти -->
+            <li class="option">
+              <input type="range" id="size-slider" min="1" max="100" value="5">
+            </li>
+          </ul>
+        </div>
         <div class="row colors">
           <label class="title">Цвета</label>
           <ul class="options">
@@ -83,7 +92,6 @@
           <button class="undo-btn">Отменить</button>
           <button class="clear-canvas">Очистить</button>
           <button class="save-img">Сохранить</button>
-          <!-- Кнопка отмены -->
         </div>
       </section>
 
@@ -96,4 +104,3 @@
     <script src="main.js"></script>
   </body>
 </html>
-
