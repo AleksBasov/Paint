@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Приложение для рисования</title>
@@ -44,25 +44,27 @@
             </li>
           </ul>
         </div>
-        <div class="row">
-          <label class="title">инструменты</label>
-          <ul class="options">
-            <!-- Инструмент кисть -->
-            <li class="option active tool" id="brush">
-              <img src="./img/кисть.png" alt="Brush">
-              <span>Кисть</span>
-            </li>
-            <!-- Инструмент ластик -->
-            <li class="option tool" id="eraser">
-              <img src="./img/ластик.png" alt="Eraser">
-              <span>Ластик</span>
-            </li>
-            <!-- Ползунок для изменения размера кисти -->
-            <li class="option">
-              <input type="range" id="size-slider" min="1" max="30" value="5">
-            </li>
-          </ul>
-        </div>
+        <!-- В разделе инструментов -->
+<div class="row">
+  <label class="title">Инструменты</label>
+  <ul class="options">
+    <!-- Инструмент кисть -->
+    <li class="option active tool" id="brush">
+      <img src="./img/кисть.png" alt="Brush">
+      <span>Кисть</span>
+    </li>
+    
+    <!-- Инструмент ластик -->
+    <li class="option tool" id="eraser">
+      <img src="./img/ластик.png" alt="Eraser">
+      <span>Ластик</span>
+    </li>
+    <!-- Ползунок для изменения размера кисти -->
+    <li class="option">
+      <input type="range" id="size-slider" min="1" max="30" value="5">
+    </li>
+  </ul>
+</div>
         <div class="row colors">
           <label class="title">Цвета</label>
           <ul class="options">
@@ -94,3 +96,4 @@
     <script src="main.js"></script>
   </body>
 </html>
+
