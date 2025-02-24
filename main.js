@@ -103,19 +103,70 @@ const drawDiamond = (e) => {
 const drawBezier = (e) => {
     if (bezierPoints.length < 2) return;
     const { x, y } = getCanvasCoordinates(e);
+
+    // Очищаем холст и восстанавливаем предыдущее состояние
+    ctx.putImageData(snapshot, 0, 0);
+
+    // Рисуем контрольные точки и линии
+    drawControlPoints();
+
+    // Рисуем кривую Безье
     ctx.beginPath();
     ctx.moveTo(bezierPoints[0].x, bezierPoints[0].y);
     ctx.bezierCurveTo(bezierPoints[1].x, bezierPoints[1].y, x, y, x, y);
+    ctx.strokeStyle = selectedColor;
+    ctx.lineWidth = brushWidth;
     ctx.stroke();
-}
+};
+
+
+const drawControlPoints = () => {
+    if (bezierPoints.length === 0) return;
+
+    // Сохраняем текущие настройки стиля
+    ctx.save();
+
+    // Рисуем линии между точками пунктиром
+    ctx.setLineDash([5, 5]); // Пунктирная линия
+    ctx.strokeStyle = "#999"; // Цвет линий
+    ctx.lineWidth = 1;
+
+    // Рисуем линии
+    ctx.beginPath();
+    ctx.moveTo(bezierPoints[0].x, bezierPoints[0].y);
+    for (let i = 1; i < bezierPoints.length; i++) {
+        ctx.lineTo(bezierPoints[i].x, bezierPoints[i].y);
+    }
+    ctx.stroke();
+
+    // Рисуем контрольные точки
+    ctx.fillStyle = "grey"; // Цвет точек
+    bezierPoints.forEach(point => {
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 5, 0, Math.PI * 2); // Кружки радиусом 5px
+        ctx.fill();
+    });
+
+    // Восстанавливаем настройки стиля
+    ctx.restore();
+};
+
 
 canvas.addEventListener("click", (e) => {
     if (selectedTool === "bezier") {
         const { x, y } = getCanvasCoordinates(e);
         bezierPoints.push({ x, y });
+
+        // Очищаем холст и восстанавливаем предыдущее состояние
+        ctx.putImageData(snapshot, 0, 0);
+
+        // Рисуем контрольные точки и линии
+        drawControlPoints();
+
+        // Если точек достаточно, рисуем кривую
         if (bezierPoints.length === 2) {
             drawBezier(e);
-            bezierPoints = [];
+            bezierPoints = []; // Сбрасываем точки после завершения
         }
     }
 });
@@ -227,6 +278,9 @@ const drawing = (e) => {
     } else if (selectedTool === "diamond") {
         drawDiamond(e);
     } else if (selectedTool === "bezier") {
+        // Рисуем контрольные точки и линии
+        drawControlPoints();
+        // Рисуем кривую Безье
         drawBezier(e);
     }
 }
