@@ -156,24 +156,69 @@ section {
   background: #6C757D;
 }
 
-.buttons .save-img {
-  background: #4A98F7;
-  border: 1px solid #4A98F7;
-}
+
 
 .buttons .undo-btn {
   background: #E02020;
   color: white;
+  transition: .4s;
 }
 
+.buttons .undo-btn:hover{
+  background-color: #760101;
+}
 .drawing-board {
-  flex: 1; /* Занимает всё оставшееся пространство */
-  overflow: hidden; /* Убираем полосы прокрутки */
+  flex: 1; 
+  overflow: hidden; 
 }
 
 .drawing-board canvas {
-  width: 100%; /* Занимает всю ширину */
-  height: 100%; /* Занимает всю высоту */
+  width: 100%; 
+  height: 100%; 
   background-color: #fff;
   border: 1px solid black;
+}
+
+/* сохранение рисунка */
+
+
+.save-img{
+  padding: 11px;
+  font-size: 14px;
+}
+a{
+  display: block;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+}
+
+a span{
+  position: relative;
+  z-index: 2;
+}
+
+a:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #017923;
+  transition: all .35s;
+}
+
+a:hover{
+  color: #fff;
+}
+
+a:hover:after{
+  width: 100%;
 }

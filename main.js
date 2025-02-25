@@ -300,3 +300,25 @@ sizeSlider.addEventListener("input", () => {
 });
 
 const brushSizeValue = document.querySelector("#brush-size-value");
+
+
+// предупреждение
+
+let hasUnsavedChanges = false;
+
+
+canvas.addEventListener("mousedown", () => {
+  hasUnsavedChanges = true;
+});
+
+
+window.addEventListener("beforeunload", (event) => {
+  if (hasUnsavedChanges) {
+    event.preventDefault();
+    event.returnValue = "";
+  }
+});
+
+saveImg.addEventListener("click", () => {
+  hasUnsavedChanges = false;
+});
