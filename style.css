@@ -260,8 +260,8 @@ a:hover:after{
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-left: 71px;
+  gap: 8px;
+  margin-left: 83px;
 }
 
 .logo img {
