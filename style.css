@@ -1,16 +1,19 @@
 
 
+@import url(https://fonts.googleapis.com/css?family=Londrina+Solid:regular);
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 
 body {
   background: #b0b0b0;
   height: 100vh; /* Занимаем всю высоту окна */
   overflow: hidden; /* Убираем полосы прокрутки */
+
+  
 }
 
 .container {
@@ -28,6 +31,9 @@ section {
 .tools-board {
   width: 210px; /* Фиксированная ширина панели инструментов */
   padding: 15px 22px 0;
+  font-family: 'Londrina Solid';
+  font-weight: bold;
+  
 }
 
 .tools-board .row {
@@ -54,6 +60,7 @@ section {
   color: #000000;
   cursor: pointer;
   padding-left: 10px;
+  
 }
 
 .option:is(:hover, .active) :where(span, label) {
@@ -199,6 +206,7 @@ a{
 a span{
   position: relative;
   z-index: 2;
+  
 }
 
 a:after{
@@ -228,10 +236,11 @@ a:hover:after{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #4A98F7;
   color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100px;
 }
 
 /* Логотип и название */
@@ -239,6 +248,7 @@ a:hover:after{
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: 71px;
 }
 
 .logo img {
@@ -250,29 +260,11 @@ a:hover:after{
 .logo h1 {
   margin: 0;
   font-size: 30px;
-  font-weight: bold;
+  font-family: 'Londrina Solid';
+  font-weight: 400;
 }
 
-/* Навигация и кнопки */
-.header-nav {
-  display: flex;
-  gap: 10px;
-}
 
-.nav-btn {
-  padding: 8px 16px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
 
 
 
