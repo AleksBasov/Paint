@@ -281,4 +281,10 @@ a:hover:after{
 
 
 
+@media(max-width: 1180px) {
+  .tools-board{
+    overflow-y: scroll;
+  }
+}
+
 
