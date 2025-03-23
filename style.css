@@ -20,6 +20,7 @@ body {
   height: 100%; /* Занимаем всю высоту */
   gap: 10px;
   padding: 10px;
+
 }
 
 section {
@@ -31,6 +32,7 @@ section {
   width: 210px; /* Фиксированная ширина панели инструментов */
   padding: 15px 22px 0;
   font-family: 'Franklin Gothic Medium', sans-serif;
+  
   
   
 }
@@ -286,5 +288,16 @@ a:hover:after{
     overflow-y: scroll;
   }
 }
+@media(max-width: 1024px) {
+  .save-img{
+    margin-bottom: 50px;
+  }
+
+  .drawing-board{
+    margin-bottom: 20px;
+   
+  }
+}
+
 
 
