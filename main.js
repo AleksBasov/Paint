@@ -345,19 +345,56 @@ if (hasUnsavedChanges) {
 
 
 saveImg.addEventListener("click", () => {
-  // Создаем временный canvas с белым фоном
+  // 1. Создаем временный canvas с белым фоном
   const tempCanvas = document.createElement('canvas');
-  const tempCtx = tempCanvas.getContext('2d');
   tempCanvas.width = canvas.width;
   tempCanvas.height = canvas.height;
+  const tempCtx = tempCanvas.getContext('2d');
   
+  // 2. Заливаем белым и копируем рисунок
   tempCtx.fillStyle = '#ffffff';
   tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
   tempCtx.drawImage(canvas, 0, 0);
-
-  // Скачиваем файл
-  const link = document.createElement('a');
-  link.href = tempCanvas.toDataURL("image/png");
-  link.download = 'рисунок.png';
-  link.click();
+  
+  // 3. Создаем Blob и URL для скачивания
+  tempCanvas.toBlob((blob) => {
+    const blobUrl = URL.createObjectURL(blob);
+    
+    // 4. Создаем скрытую ссылку для скачивания
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = 'рисунок.png';
+    
+    // 5. Особый подход для Яндекс.Браузера
+    if (/YaBrowser/i.test(navigator.userAgent)) {
+      // Открываем в новой вкладке как fallback
+      const newTab = window.open();
+      newTab.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <body>
+            <img src="${blobUrl}" style="max-width:100%">
+            <script>
+              setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = "${blobUrl}";
+                link.download = "рисунок.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }, 500);
+            </script>
+          </body>
+        </html>
+      `);
+    } else {
+      // Стандартное скачивание для других браузеров
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    }
+  }, 'image/png');
 });
