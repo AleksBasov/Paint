@@ -343,20 +343,12 @@ if (hasUnsavedChanges) {
 }
 });
 
-// saveImg.addEventListener("click", () => {
-// hasUnsavedChanges = false;
-// });
-
 
 saveImg.addEventListener("click", () => {
   const dataURL = canvas.toDataURL("image/png");
   const newTab = window.open();
   newTab.document.write(`
     <img src="${dataURL}" style="max-width:100%; display:block; margin:20px auto;">
-    <a href="${dataURL}" download="рисунок-${Date.now()}.png" 
-       style="display:block; text-align:center; margin:20px; padding:10px; background:#4CAF50; color:white;">
-      Скачать изображение
-    </a>
   `);
   newTab.document.close();
 });
