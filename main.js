@@ -343,6 +343,43 @@ if (hasUnsavedChanges) {
 }
 });
 
+// saveImg.addEventListener("click", () => {
+// hasUnsavedChanges = false;
+// });
+
+
 saveImg.addEventListener("click", () => {
-hasUnsavedChanges = false;
+  // Создаем временную ссылку
+  const dataURL = canvas.toDataURL("image/png");
+  
+  // Для мобильных устройств открываем в новой вкладке
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    const newTab = window.open();
+    newTab.document.write(`<img src="${dataURL}" style="max-width:100%;"/>`);
+    newTab.document.close();
+    
+    // Добавляем кнопку для сохранения (не все браузеры поддерживают)
+    setTimeout(() => {
+      const saveBtn = newTab.document.createElement("a");
+      saveBtn.href = dataURL;
+      saveBtn.download = drawing-$;{Date.now()};png;
+      saveBtn.textContent = "Сохранить изображение";
+      saveBtn.style.display = "block";
+      saveBtn.style.margin = "10px";
+      saveBtn.style.padding = "10px";
+      saveBtn.style.backgroundColor = "#4CAF50";
+      saveBtn.style.color = "white";
+      saveBtn.style.textAlign = "center";
+      saveBtn.style.textDecoration = "none";
+      newTab.document.body.appendChild(saveBtn);
+    }, 500);
+  } else {
+    // Для ПК - стандартное сохранение
+    const link = document.createElement("a");
+    link.download = drawing-$;{Date.now()};png;
+    link.href = dataURL;
+    link.click();
+  }
+  
+  hasUnsavedChanges = false;
 });
