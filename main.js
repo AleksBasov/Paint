@@ -345,10 +345,19 @@ if (hasUnsavedChanges) {
 
 
 saveImg.addEventListener("click", () => {
-  const dataURL = canvas.toDataURL("image/png");
-  const newTab = window.open();
-  newTab.document.write(`
-    <img src="${dataURL}" style="max-width:100%; display:block; margin:20px auto;">
-  `);
-  newTab.document.close();
+  // Создаем временный canvas с белым фоном
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+  
+  tempCtx.fillStyle = '#ffffff';
+  tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+  tempCtx.drawImage(canvas, 0, 0);
+
+  // Скачиваем файл
+  const link = document.createElement('a');
+  link.href = tempCanvas.toDataURL("image/png");
+  link.download = 'рисунок.png';
+  link.click();
 });
