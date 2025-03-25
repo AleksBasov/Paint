@@ -345,7 +345,7 @@ if (hasUnsavedChanges) {
 
 
 saveImg.addEventListener("click", () => {
-  const dataURL = canvas.toDataURL("image/jpg");
+  const dataURL = canvas.toDataURL("image/jpeg");
   const newTab = window.open();
   newTab.document.write(`
     <img src="${dataURL}" style="max-width:100%; display:block; margin:20px auto;">
