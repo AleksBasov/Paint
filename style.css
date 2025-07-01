@@ -311,7 +311,7 @@ a:hover:after{
 }
 
 .logo img {
- width: 80px;
+ width: 100px;
  height: auto;
 
 }
@@ -524,7 +524,7 @@ a:hover:after{
   border-radius: 6px;
   padding: 0 10px;
   height: 36px;
-  min-width: 36px;
+  min-width: 120px;
   width: 100%;
   font-size: 13px;
   font-family: 'Franklin Gothic Medium', sans-serif;
@@ -586,7 +586,7 @@ a:hover:after{
     align-items: center;
     width: 100%;
     min-width: 0;
-    font-size: 15px;
+    font-size: 17px;
     padding: 0;
     border-radius: 0;
     margin-bottom: 10px;
@@ -599,7 +599,7 @@ a:hover:after{
     margin-right: 10px;
   }
   .option span, .option label {
-    font-size: 15px;
+    font-size:17px;
     color: #000;
     padding-left: 10px;
     flex: none;
@@ -635,6 +635,25 @@ a:hover:after{
     border-radius: 4px;
     margin: 0;
     display: block;
+  }
+  .app-header {
+    height: 130px;
+    padding: 20px 30px;
+  }
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
+  .logo h1 {
+    font-size: 37px;
+    margin: 0;
+    font-family: 'Londrina Solid';
+    font-weight: 400;
+  }
+  .title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
   }
 }
 
