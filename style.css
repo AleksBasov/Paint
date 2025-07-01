@@ -1,4 +1,3 @@
-
 @import url(https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,regular,900);
 * {
   margin: 0;
@@ -86,15 +85,60 @@ section {
 
 .colors .options {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  width: auto;
+  max-width: 260px;
 }
 
 .colors .option {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  margin-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px !important;
+  height: 26px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  aspect-ratio: 1/1;
+  border-radius: 50% !important;
+  border: 2px solid #bfbfbf;
+  margin: 0;
+  box-sizing: border-box;
+  transition: border 0.2s, box-shadow 0.2s;
+  cursor: pointer;
   position: relative;
+  background-clip: padding-box;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: middle;
+  flex: none !important;
+}
+
+.colors .option.selected {
+  border: 4px solid #4A98F7;
+  box-shadow: 0 0 0 3px #b3d4fc;
+}
+
+.colors .option input[type="color"] {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .colors .option:nth-child(1) {
@@ -288,14 +332,309 @@ a:hover:after{
     overflow-y: scroll;
   }
 }
-@media(max-width: 1024px) {
-  .save-img{
-    margin-bottom: 50px;
+@media(max-width: 1024px), (orientation: landscape) {
+  .container {
+    flex-direction: column-reverse;
+    padding: 0;
+    gap: 0;
+    height: 100vh;
   }
+  .tools-board {
+    width: 100vw;
+    min-width: 0;
+    max-width: 100vw;
+    padding: 5px 0 0 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #fff;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    touch-action: pan-x;
+    padding-bottom: env(safe-area-inset-bottom, 10px);
+    scrollbar-width: thin;
+    scrollbar-color: #b0b0b0 #fff;
+  }
+  .tools-board::-webkit-scrollbar {
+    height: 6px;
+    background: #fff;
+  }
+  .tools-board::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 3px;
+  }
+  .tools-board .row {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 120px;
+    width: 100%;
+    margin-bottom: 0;
+    margin-right: 18px;
+  }
+  .row .options {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .row .options .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+    font-size: 13px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    margin: 0 0 8px 0;
+    box-sizing: border-box;
+    gap: 8px;
+  }
+  .row .options .option img {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  .option span, .option label {
+    display: inline !important;
+    font-size: 13px;
+    color: #222;
+    padding-left: 0;
+    flex: 1 1 auto;
+    text-align: left;
+  }
+  .title {
+    display: block !important;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #4A98F7;
+  }
+  .colors .options {
+    gap: 14px;
+    margin-bottom: 12px;
+    padding: 0;
+    max-width: 260px;
+    width: auto;
+    justify-content: flex-start;
+  }
+  .colors .option {
+    width: 26px;
+    height: 26px;
+    margin: 0;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  .buttons button, .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 6px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: #222;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #f5f5f5;
+    border: none;
+    position: relative;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin: 0;
+  }
+  .buttons button:active, .wrapper:active {
+    background: #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+  .save-img span {
+    display: inline;
+    font-size: 13px;
+    color: #fff;
+  }
+  .drawing-board {
+    flex: 1;
+    margin-bottom: calc(60px + env(safe-area-inset-bottom, 10px));
+    height: calc(100vh - 80px);
+    min-height: 200px;
+  }
+  .drawing-board canvas {
+    height: 100% !important;
+    min-height: 200px;
+  }
+  .app-header {
+    height: 60px;
+    padding: 5px 10px;
+  }
+  .logo {
+    margin-left: 0;
+    gap: 4px;
+  }
+  .logo img {
+    width: 40px;
+  }
+  .logo h1 {
+    font-size: 18px;
+  }
+  .wrapper .save-img {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 6px;
+    margin: 0;
+  }
+}
 
-  .drawing-board{
+/* --- Кнопка скачать --- */
+.wrapper {
+  width: 100%;
+  display: flex;
+}
+.wrapper .save-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #017923;
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  padding: 0 10px;
+  height: 36px;
+  min-width: 36px;
+  width: 100%;
+  font-size: 13px;
+  font-family: 'Franklin Gothic Medium', sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  margin: 0;
+}
+.wrapper .save-img:hover, .wrapper .save-img:active {
+  background: #015e1a;
+  color: #fff;
+}
+.wrapper .save-img span {
+  color: #fff;
+  font-size: 13px;
+  display: inline;
+}
+.wrapper a {
+  border: none;
+  letter-spacing: normal;
+  text-align: center;
+  box-shadow: none;
+}
+
+@media (min-width: 1025px) {
+  .container {
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+  }
+  .tools-board {
+    width: 210px;
+    min-width: 210px;
+    max-width: 210px;
+    padding: 15px 22px 0;
+    border-radius: 7px;
+    display: block;
+    position: static;
+    box-shadow: none;
+    background: #fff;
+    overflow: visible;
+  }
+  .tools-board .row {
     margin-bottom: 20px;
-   
+    display: block;
+    width: 100%;
+  }
+  .row .options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 10px 0 0 5px;
+    padding: 0;
+    width: 100%;
+  }
+  .row .options .option {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    font-size: 15px;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    gap: 0;
+  }
+  .row .options .option img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  .option span, .option label {
+    font-size: 15px;
+    color: #000;
+    padding-left: 10px;
+    flex: none;
+    text-align: left;
+  }
+  .buttons {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+  }
+  .buttons button, .wrapper {
+    height: auto;
+    min-width: 0;
+    border-radius: 4px;
+    padding: 11px 0;
+    font-size: 0.9rem;
+    color: #222;
+    box-shadow: none;
+    background: none;
+    border: none;
+    margin: 0 0 13px 0;
+    display: block;
+    width: 100%;
+  }
+  .wrapper .save-img {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    padding: 11px;
+    border-radius: 4px;
+    margin: 0;
+    display: block;
   }
 }
 
