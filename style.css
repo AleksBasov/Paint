@@ -9,7 +9,8 @@
 body {
   background: #b0b0b0;
   height: 90vh; /* Занимаем всю высоту окна */
-  overflow: hidden; 
+  
+  
 
   
 }
@@ -25,12 +26,14 @@ body {
 section {
   background: #ffffff;
   border-radius: 7px;
+  
 }
 
 .tools-board {
   width: 210px; /* Фиксированная ширина панели инструментов */
   padding: 15px 22px 0;
   font-family: 'Franklin Gothic Medium', sans-serif;
+  height: fit-content;
   
   
   
