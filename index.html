@@ -1,121 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>SketchLab</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./img/icons.png">
-  </head>
-  <body>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>SketchLab Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="logo">
+      <div class="logo-icon">S</div>
+      <h1>SketchLab</h1>
+    </div>
+    <div class="header-center">
+      <button class="header-btn" id="btn-undo" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        <span class="btn-text">Отменить</span>
+      </button>
+      <button class="header-btn" id="btn-redo" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg>
+        <span class="btn-text">Вернуть</span>
+      </button>
+      <div class="sep"></div>
+      <button class="header-btn" id="btn-zoom-out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <span class="zoom-display" id="zoom-display">100%</span>
+      <button class="header-btn" id="btn-zoom-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <button class="header-btn" id="btn-zoom-fit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </button>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn danger" id="btn-clear">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <span class="btn-text">Очистить</span>
+      </button>
+      <button class="header-btn" id="btn-shortcuts">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.001M10 8h.001M14 8h.001M18 8h.001M8 12h.001M12 12h.001M16 12h.001M6 16h12"/></svg>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" title="Сменить тему">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="header-btn primary" id="btn-save">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="btn-text">Скачать</span>
+      </button>
+    </div>
+  </header>
 
-    <header class="app-header">
-      <div class="logo">
-        <img src="./img/paintLogo.png" alt="Логотип">
-        <h1>SketchLab</h1>
+  <div class="main-layout">
+
+    <!-- ЛЕВАЯ ПАНЕЛЬ: ИНСТРУМЕНТЫ С ПОДПИСЯМИ -->
+    <nav class="toolbar" id="toolbar"></nav>
+
+    <!-- ХОЛСТ -->
+    <section class="canvas-area" id="canvas-area">
+      <div class="canvas-wrapper" id="canvas-wrapper">
+        <canvas id="canvas"></canvas>
       </div>
-    </header>
+      <div class="coords-bar" id="coords-bar">
+        <div>X: <span id="coord-x">0</span></div>
+        <div>Y: <span id="coord-y">0</span></div>
+        <div><span id="canvas-size">1200 x 800</span></div>
+      </div>
+    </section>
 
+    <!-- ПРАВАЯ ПАНЕЛЬ: СВОЙСТВА -->
+    <aside class="props-panel">
+      <div class="panel-section">
+        <div class="panel-label">Кисть</div>
+        <div class="size-preview"><div class="size-preview-dot" id="size-dot"></div></div>
+        <div class="slider-row">
+          <label>Размер</label>
+          <input type="range" id="size-slider" min="1" max="80" value="5">
+          <span class="slider-val" id="size-val">5</span>
+        </div>
+        <div class="slider-row">
+          <label>Прозрач.</label>
+          <input type="range" id="opacity-slider" min="5" max="100" value="100">
+          <span class="slider-val" id="opacity-val">100%</span>
+        </div>
+      </div>
+      <div class="panel-section" id="shape-options" style="display:none">
+        <div class="panel-label">Фигуры</div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="fill-shape">
+          <div class="custom-check"></div><span>Заливка</span>
+        </label>
+        <label class="checkbox-row">
+          <input type="checkbox" id="smooth-line" checked>
+          <div class="custom-check"></div><span>Сглаживание</span>
+        </label>
+      </div>
+      <div class="panel-section">
+        <div class="panel-label">Цвет</div>
+        <div class="color-grid" id="color-grid"></div>
+        <div class="color-picker-row">
+          <input type="color" id="color-picker" value="#10b981">
+          <input type="text" class="color-hex" id="color-hex" value="#10b981" maxlength="7" spellcheck="false">
+        </div>
+      </div>
+      <div class="panel-section">
+        <div class="panel-label">История</div>
+        <div class="history-btns">
+          <button id="btn-undo-panel" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Отменить
+          </button>
+          <button id="btn-redo-panel" disabled>
+            Вернуть
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
 
-    <div class="container">
-      <!-- Панель инструментов -->
-      <section class="tools-board">
-        <div class="row">
-          <label class="title">Фигуры</label>
-          <ul class="options">
-            <!-- Инструмент для рисования прямоугольника -->
-            <li class="option tool" id="rectangle">
-              <img src="./img/квадрат.png" alt="Rectangle">
-              <span>Квадрат</span>
-            </li>
-            <!-- Инструмент для рисования круга -->
-            <li class="option tool" id="circle">
-              <img src="./img/круг.png" alt="Circle">
-              <span>Круг</span>
-            </li>
-            <!-- Инструмент для рисования треугольника -->
-            <li class="option tool" id="triangle">
-              <img src="./img/треугольник.png" alt="Triangle">
-              <span>Треугольник</span>
-            </li>
-            <!-- Инструмент для рисования линии -->
-            <li class="option tool" id="line">
-              <div class="line"></div>
-              <span>Линия</span>
-            </li>
-            <!-- Инструмент для рисования ромба -->
-            <li class="option tool" id="diamond">
-              <img src="./img/ромб.png" alt="Diamond">
-              <span>Ромб</span>
-            </li>
-            <li class="option">
-              <input type="checkbox" id="fill-color">
-              <label for="fill-color">Заливка фигуры</label>
-            </li>
-          </ul>
+    <!-- МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ -->
+    <div class="mobile-bottom" id="mobile-bottom">
+      <div class="mobile-tabs">
+        <button class="mobile-tab active" data-tab="tools">Инструменты</button>
+        <button class="mobile-tab" data-tab="settings">Настройки</button>
+        <button class="mobile-tab" data-tab="colors">Цвета</button>
+        <button class="mobile-tab" data-tab="actions">Действия</button>
+      </div>
+      <div class="mobile-tab-content active" id="tab-tools">
+        <div class="mobile-tools-grid" id="mobile-tools-grid"></div>
+      </div>
+      <div class="mobile-tab-content" id="tab-settings">
+        <div class="mobile-settings">
+          <div class="slider-row">
+            <label>Размер</label>
+            <input type="range" class="mobile-size-slider" min="1" max="80" value="5">
+            <span class="slider-val mobile-size-val">5</span>
+          </div>
+          <div class="slider-row">
+            <label>Прозрач.</label>
+            <input type="range" class="mobile-opacity-slider" min="5" max="100" value="100">
+            <span class="slider-val mobile-opacity-val">100%</span>
+          </div>
+          <label class="checkbox-row">
+            <input type="checkbox" class="mobile-fill-shape">
+            <div class="custom-check"></div><span>Заливка фигур</span>
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" class="mobile-smooth-line" checked>
+            <div class="custom-check"></div><span>Сглаживание</span>
+          </label>
         </div>
-        <!-- В разделе инструментов -->
-        <div class="row">
-          <label class="title">Инструменты</label>
-          <ul class="options">
-            <!-- Инструмент кисть -->
-            <li class="option active tool" id="brush">
-              <img src="./img/кисть.png" alt="Brush">
-              <span>Кисть</span>
-            </li>
-            <!-- Инструмент карандаш -->
-            <li class="option tool" id="pencil">
-              <img src="./img/карандаш.png" alt="Pencil">
-              <span>Карандаш</span>
-            </li>
-            <!-- Инструмент ластик -->
-            <li class="option tool" id="eraser">
-              <img src="./img/ластик.png" alt="Eraser">
-              <span>Ластик</span>
-            </li>
-            <!-- Инструмент кривая Безье -->
-            <li class="option tool" id="bezier">
-              <img src="./img/криваяБезье.png" alt="Bezier">
-              <span>Кривая Безье</span>
-            </li>
-            <!-- Ползунок для изменения размера кисти -->
-            <span>Размер</span>
-            <li class="option">
-              <input type="range" id="size-slider" min="1" max="100" value="5">
-              <span id="brush-size-value">5</span> 
-            </li>
-          </ul>
-        </div>
-        <div class="row colors">
-          <label class="title">Цвета</label>
-          <ul class="options">
-            <!-- Кнопки выбора цвета -->
-            <li class="option"></li>
-            <li class="option selected"></li>
-            <li class="option"></li>
-            <li class="option"></li>
-            <li class="option">
-              <input type="color" id="color-picker" value="#4A98F7">
-            </li>
-          </ul>
-        </div>
-        <div class="row buttons">
-          <!-- Кнопки очистки и сохранения -->
-          <button class="undo-btn">Отменить</button>
-          <button class="clear-canvas">Очистить</button>
-          <div class="wrapper">
-            <a href="#" class="save-img"><span>Скачать</span></a>
+      </div>
+      <div class="mobile-tab-content" id="tab-colors">
+        <div class="mobile-colors">
+          <div class="color-grid" id="mobile-color-grid"></div>
+          <div class="color-picker-row">
+            <input type="color" class="mobile-color-picker" value="#10b981">
+            <input type="text" class="color-hex mobile-color-hex" value="#10b981" maxlength="7" spellcheck="false">
           </div>
         </div>
-      </section>
-
-      <!-- Холст для рисования -->
-      <section class="drawing-board">
-        <canvas></canvas>
-      </section>
+      </div>
+      <div class="mobile-tab-content" id="tab-actions">
+        <div class="mobile-actions">
+          <button class="mobile-action-btn" id="m-btn-undo" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Отменить
+          </button>
+          <button class="mobile-action-btn" id="m-btn-redo" disabled>
+            Вернуть
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/></svg>
+          </button>
+          <button class="mobile-action-btn" id="m-btn-zoom-out">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Уменьшить
+          </button>
+          <button class="mobile-action-btn" id="m-btn-zoom-in">
+            Увеличить
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <button class="mobile-action-btn" id="m-btn-zoom-fit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            Сброс зума
+          </button>
+          <button class="mobile-action-btn danger" id="m-btn-clear">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Очистить
+          </button>
+          <button class="mobile-action-btn primary full" id="m-btn-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Скачать PNG
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="main.js"></script>
+  <div class="eraser-cursor-visual" id="eraser-cursor"></div>
+  <div class="toast-container" id="toast-container"></div>
+
+  <div class="modal-overlay" id="shortcuts-modal">
+    <div class="modal">
+      <h2>Горячие клавиши</h2>
+      <ul class="shortcut-list">
+        <li><span>Кисть</span><span class="key">B</span></li>
+        <li><span>Карандаш</span><span class="key">P</span></li>
+        <li><span>Ластик</span><span class="key">E</span></li>
+        <li><span>Линия</span><span class="key">L</span></li>
+        <li><span>Прямоугольник</span><span class="key">R</span></li>
+        <li><span>Круг</span><span class="key">C</span></li>
+        <li><span>Треугольник</span><span class="key">T</span></li>
+        <li><span>Ромб</span><span class="key">D</span></li>
+        <li><span>Стрелка</span><span class="key">A</span></li>
+        <li><span>Звезда</span><span class="key">S</span></li>
+        <li><span>Заливка</span><span class="key">G</span></li>
+        <li><span>Пипетка</span><span class="key">I</span></li>
+        <li><span>Отменить</span><span class="key">Ctrl+Z</span></li>
+        <li><span>Вернуть</span><span class="key">Ctrl+Y</span></li>
+        <li><span>Увеличить</span><span class="key">Ctrl++</span></li>
+        <li><span>Уменьшить</span><span class="key">Ctrl+-</span></li>
+        <li><span>Сброс зума</span><span class="key">Ctrl+0</span></li>
+        <li><span>Скачать</span><span class="key">Ctrl+S</span></li>
+        <li><span>Очистить</span><span class="key">Del</span></li>
+        <li><span>Размер кисти</span><span class="key">] / [</span></li>
+      </ul>
+      <button class="modal-close" id="close-shortcuts">Закрыть</button>
+    </div>
+  </div>
+
+<script src="main.js"></script>
+    
   </body>
-</html>
+  </html>
